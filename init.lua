@@ -45,11 +45,10 @@ vim.api.nvim_create_autocmd('BufWritePre',{
 
 require('feline').setup()
 require('cokeline').setup()
-local lspconfig = require('lspconfig')
-lspconfig.zls.setup{}
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.lua_ls.setup{}
-require'neoproj'.setup{
+require 'lspconfig'.zls.setup{}
+require 'lspconfig'.pyright.setup{}
+require 'lspconfig'.bashls.setup{}
+require 'lspconfig'.lua_ls.setup{}
+require 'lspconfig'.neoproj.setup{
   project_path = '~/dev/distant-hill'
   }
