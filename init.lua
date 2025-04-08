@@ -1,6 +1,22 @@
 local vim = vim
 local Plug = vim.fn['plug#']
 
+-- mini.nvim init
+local path_pkg = vim.fn.stdpath('data') .. '/site'
+local mini_path = path_pkg .. '/pack/deps/start/mini.nvim'
+
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    -- Uncomment next line to use 'stable' branch
+    -- '--branch', 'stable',
+    'https://github.com/echasnovski/mini.nvim', mini_path
+    }
+    vim.fn.system(clone_cmd)
+    vim.cmd('packadd mini.nvim | helptags ALL')
+end
+
 vim.call('plug#begin')
 Plug('folke/which-key.nvim')
 Plug('nvim-telescope/telescope.nvim')
@@ -18,9 +34,9 @@ Plug('nvim-lua/plenary.nvim')
 Plug('nvim-tree/nvim-web-devicons')
 Plug('willothy/nvim-cokeline')
 Plug('leafo/moonscript-vim')
+Plug('pigpigyyy/yuescript-vim')
 Plug('neovim/nvim-lspconfig')
 Plug('ziglang/zig.vim')
-Plug('pluffie/neoproj')
 Plug('ryanoasis/vim-devicons')
 vim.call('plug#end')
 
@@ -49,6 +65,3 @@ require 'lspconfig'.zls.setup{}
 require 'lspconfig'.pyright.setup{}
 require 'lspconfig'.bashls.setup{}
 require 'lspconfig'.lua_ls.setup{}
-require 'lspconfig'.neoproj.setup{
-  project_path = '~/dev/distant-hill'
-  }
